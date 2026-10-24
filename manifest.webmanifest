@@ -1,0 +1,15 @@
+{
+  "name": "CCNAクエスト",
+  "short_name": "CCNAクエスト",
+  "description": "CCNAをゲーム感覚で覚える学習RPG",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#16213e",
+  "theme_color": "#16213e",
+  "lang": "ja",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
