@@ -82,7 +82,7 @@
   Q.area = function (id) { return Q.areas.filter(function (a) { return a.id === id; })[0]; };
 
   /* ---------- セーブ ---------- */
-  var KEY = 'ccnaquest.save.v1';
+  var KEY = window.QUEST_SAVE_KEY || 'ccnaquest.save.v1';   /* 試作版は別のキーを指定して、本番の記録と混ざらないようにする */
   function fresh() {
     return {
       v: 1, name: '', caught: {}, srs: {}, badges: {},

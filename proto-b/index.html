@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b1224">
+<title>ネットワーク障害調査室(試作B)</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- タイトル -->
+  <section id="s-title" class="screen">
+    <div id="title-body"></div>
+  </section>
+
+  <!-- ケース選択 -->
+  <section id="s-cases" class="screen" hidden>
+    <header class="topbar">
+      <button id="c-back" class="tb-btn" type="button">タイトルへ</button>
+      <div class="tb-title">事件ファイル</div>
+    </header>
+    <div id="cases-list" class="cases-list"></div>
+    <div id="cases-foot" class="cases-foot"></div>
+  </section>
+
+  <!-- 会話・調査・推理・解決 -->
+  <section id="s-scene" class="screen" hidden>
+    <header class="topbar">
+      <button id="b-menu" class="tb-btn" type="button">事件一覧</button>
+      <div id="tb-title" class="tb-title"></div>
+      <div class="tb-right">
+        <span id="tb-pts" class="tb-pts"></span>
+        <button id="b-memo" class="tb-btn memo" type="button">証拠メモ<span id="memo-n" class="badge">0</span></button>
+      </div>
+    </header>
+    <div id="stage" class="stage bg-office">
+      <div id="prop-slot" class="prop-slot"></div>
+      <div id="people" class="people"></div>
+    </div>
+    <div id="panel" class="panel"></div>
+  </section>
+
+  <!-- 擬似端末 -->
+  <section id="s-term" class="screen" hidden>
+    <header class="topbar">
+      <button id="t-back" class="tb-btn" type="button">調査にもどる</button>
+      <div id="t-title" class="tb-title">調査用の端末</div>
+      <div class="tb-right">
+        <span id="t-pts" class="tb-pts"></span>
+        <button id="t-memo" class="tb-btn memo" type="button">証拠メモ<span id="t-memo-n" class="badge">0</span></button>
+      </div>
+    </header>
+    <div id="termpre" class="termpre"></div>
+    <div id="readbox" class="readbox"></div>
+    <div class="term-tools">
+      <div id="devtabs" class="devtabs"></div>
+      <button id="t-clear" class="tb-btn" type="button">画面を消す</button>
+    </div>
+    <div id="cmdlist" class="cmdlist"></div>
+  </section>
+
+  <!-- 事件のふりかえり -->
+  <section id="s-review" class="screen" hidden>
+    <div id="review-body" class="review-body"></div>
+  </section>
+
+  <!-- 証拠メモ -->
+  <div id="memo" class="overlay" hidden>
+    <div class="sheet">
+      <header class="sheet-h"><b>証拠メモ</b><button id="memo-close" class="tb-btn" type="button">とじる</button></header>
+      <div id="memo-list" class="sheet-b"></div>
+    </div>
+  </div>
+
+  <div id="toast" role="status"></div>
+</div>
+
+<!-- 本番のセーブと混ぜないため、core.js より前にセーブキーを決める -->
+<script>window.QUEST_SAVE_KEY = 'ccnaquest.protoB.v1';</script>
+<script src="../js/core.js"></script>
+<script src="../packs/ccna/a1.js"></script>
+<script src="../packs/ccna/a2.js"></script>
+<script src="../packs/ccna/a3.js"></script>
+<script src="../js/sprites.js"></script>
+<script src="../js/audio.js"></script>
+
+<!-- 事件データ(事件を足すときは、ここに1行足す) -->
+<script src="data/cases.js"></script>
+<script src="data/case1.js"></script>
+<script src="data/case2.js"></script>
+<script src="data/case3.js"></script>
+
+<script src="js/sfx.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

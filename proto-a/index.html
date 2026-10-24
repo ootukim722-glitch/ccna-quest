@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#16213e">
+<title>CCNAクエスト 試作A</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <section id="s-title" class="screen"></section>
+
+  <section id="s-world" class="screen" hidden>
+    <header class="hud">
+      <div class="hud-area"><span id="hud-area">-</span><small id="hud-prog"></small></div>
+      <button id="btn-menu" class="hud-btn" aria-label="メニュー">メニュー</button>
+    </header>
+    <div class="map-wrap"><canvas id="map" width="176" height="208"></canvas></div>
+    <div class="pad">
+      <div class="dpad">
+        <button data-dir="up" class="d-up" aria-label="上"></button>
+        <button data-dir="left" class="d-left" aria-label="左"></button>
+        <button data-dir="right" class="d-right" aria-label="右"></button>
+        <button data-dir="down" class="d-down" aria-label="下"></button>
+      </div>
+      <button id="btn-a" class="a-btn">はなす</button>
+    </div>
+  </section>
+
+  <section id="s-battle" class="screen" hidden>
+    <div id="b-field" class="bg-grass">
+      <div class="plat plat-foe"></div>
+      <div class="plat plat-me"></div>
+      <img id="b-foe" class="spr foe px" alt="">
+      <img id="b-me" class="spr me px" alt="">
+      <div id="b-fx"></div>
+      <div class="binfo foe">
+        <div class="brow"><span class="bname" id="b-foe-name"></span><span class="blv" id="b-foe-lv"></span></div>
+        <div class="bterm" id="b-foe-term"></div>
+        <div class="brow"><span class="hplabel">HP</span><div class="hpbar g"><i id="b-foe-hp"></i></div></div>
+        <div class="balls" id="b-foe-balls"></div>
+      </div>
+      <div class="binfo me">
+        <div class="brow"><span class="bname" id="b-me-name"></span><span class="blv" id="b-me-lv"></span></div>
+        <div class="brow"><span class="hplabel">HP</span><div class="hpbar g"><i id="b-me-hp"></i></div></div>
+        <div class="hpnum" id="b-me-hpnum"></div>
+        <div class="brow"><span class="hplabel">EXP</span><div class="expbar"><i id="b-me-exp"></i></div></div>
+      </div>
+      <div id="b-lvup" class="lvup" hidden>LEVEL UP</div>
+    </div>
+    <div id="b-msg"><div id="b-text"></div><i id="b-next" class="nextmark"></i></div>
+    <div id="b-cmd" class="cmd4"></div>
+    <div id="b-sw" hidden></div>
+  </section>
+
+  <section id="s-panel" class="screen" hidden></section>
+
+  <div id="evo" hidden><div id="evo-ring"></div><img id="evo-img" class="px" alt=""></div>
+  <div id="badge" hidden><img id="badge-img" alt=""></div>
+  <div id="dialog" hidden>
+    <div class="dlg-box">
+      <div class="dlg-name" id="dlg-name"></div>
+      <div class="dlg-text" id="dlg-text"></div>
+      <i class="dlg-next"></i>
+    </div>
+  </div>
+  <div id="choice" hidden></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="toast"></div>
+</div>
+
+<script>window.QUEST_SAVE_KEY = 'ccnaquest.protoA.v1';</script>
+<script src="../js/core.js"></script>
+<script src="../packs/ccna/a1.js"></script>
+<script src="../js/sprites.js"></script>
+<script src="../js/audio.js"></script>
+<script src="js/pa-sprites.js"></script>
+<script src="js/pa-tiles.js"></script>
+<script src="js/pa-data.js"></script>
+<script src="js/pa-ui.js"></script>
+<script src="js/pa-party.js"></script>
+<script src="js/pa-battle.js"></script>
+<script src="js/pa-world.js"></script>
+<script src="js/pa-screens.js"></script>
+<script src="js/pa-main.js"></script>
+</body>
+</html>
