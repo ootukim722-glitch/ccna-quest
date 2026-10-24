@@ -44,7 +44,7 @@
       function learnCard(m) {
         var h = '<div class="learn-card"><div class="muted">はじめて出会った! まず説明を聞こう</div><h3>' + Q.esc(m.nick) + '</h3>' +
           '<div class="muted">' + Q.esc(m.term) + '</div>' +
-          '<div class="analogy">💡 ' + Q.rich(m.analogy || '') + '</div><ul>';
+          '<div class="analogy">たとえると: ' + Q.rich(m.analogy || '') + '</div><ul>';
         (m.points || []).forEach(function (p) { h += '<li>' + Q.rich(p) + '</li>'; });
         return h + '</ul></div>' + button('わかった! バトルかいし');
       }
@@ -78,7 +78,7 @@
       function feedback(ok, p, last) {
         return new Promise(function (res) {
           var fb = body.querySelector('#b-fb');
-          fb.innerHTML = '<div class="verdict ' + (ok ? 'good' : 'bad') + '">' + (ok ? '⭕ せいかい! こうげきが きまった!' : '❌ おしい! やる気が すこし へった…') + '</div>' +
+          fb.innerHTML = '<div class="verdict ' + (ok ? 'good' : 'bad') + '">' + (ok ? 'せいかい! こうげきが きまった!' : 'おしい! やる気が すこし へった…') + '</div>' +
             '<div class="ex ' + (ok ? 'good' : 'bad') + '">' + Q.rich(p.ex) + '</div>' + button(last ? 'つぎへ' : 'つぎのもんだい');
           fb.querySelector('[data-go]').onclick = function () { Q.sfx('tap'); res(); };
           fb.scrollIntoView({ block: 'end', behavior: 'smooth' });
@@ -95,7 +95,7 @@
           await waitTap(learnCard(mon));
         } else if (opts.kind === 'boss') {
           await waitTap('<div class="learn-card"><h3>' + Q.esc(opts.enemyName) + '</h3><div class="analogy">' + Q.rich(opts.intro || '') + '</div>' +
-            '<div class="muted">全 ' + hpMax + ' 問。やる気(❤️)は ' + heartsMax + ' つ。がんばれ!</div></div>' + button('しょうぶ!'));
+            '<div class="muted">全 ' + hpMax + ' 問。やる気ゲージは ' + heartsMax + ' つ。がんばれ!</div></div>' + button('しょうぶ!'));
         } else if (opts.kind === 'review') {
           await waitTap('<div class="learn-card"><h3>' + Q.esc(opts.enemyName) + '</h3><div class="analogy">' + Q.rich(opts.intro || '') + '</div></div>' + button('たおしにいく!'));
         } else {
@@ -125,16 +125,16 @@
             if (newly) { Q.S.caught[mon.id] = { day: Q.day() }; Q.S.daily.caught++; }
             Q.write();
             var star = Q.stars(mon);
-            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">' + (newly ? '🎉 ' + Q.esc(mon.nick) + ' が なかまに なった!' : '✨ ' + Q.esc(mon.nick) + ' に勝った!') + '</div>' +
+            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">' + (newly ? Q.esc(mon.nick) + ' が なかまに なった!' : Q.esc(mon.nick) + ' に勝った!') + '</div>' +
               '<div class="muted">' + Q.esc(mon.term) + ' ／ ミス ' + mistakes + ' 回</div>' +
-              '<div class="analogy">💡 ' + Q.rich(mon.analogy || '') + '</div><ul>' + (mon.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul>' +
-              '<div class="stars">マスターど ' + '★'.repeat(star) + '☆'.repeat(3 - star) + '</div></div>' + button('とじる'));
+              '<div class="analogy">たとえると: ' + Q.rich(mon.analogy || '') + '</div><ul>' + (mon.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul>' +
+              '<div class="stars">マスターど ' + Q.pips(star, 3) + '</div></div>' + button('とじる'));
           } else if (opts.kind === 'boss') {
             Q.S.badges[opts.area.id] = Q.S.badges[opts.area.id] || Q.day(); Q.write();
-            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">🏅 ' + Q.esc(opts.area.name) + ' のバッジを ゲット!</div>' +
+            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">' + Q.esc(opts.area.name) + ' のバッジを ゲット!</div>' +
               '<div class="muted">ミス ' + mistakes + ' 回。よくがんばった!</div></div>' + button('とじる'));
           } else {
-            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">✨ ワスレモンを やっつけた!</div>' +
+            await waitTap('<div class="learn-card"><div class="verdict good" style="font-size:1.3rem">ワスレモンを やっつけた!</div>' +
               '<div class="muted">思い出す力が ついたよ。ミス ' + mistakes + ' 回</div></div>' + button('とじる'));
           }
           Q.bgm(null);
@@ -143,7 +143,7 @@
           Q.sfx('lose');
           var hint = '';
           if (mon && opts.kind === 'wild') {
-            hint = '<div class="analogy">💡 ' + Q.rich(mon.analogy || '') + '</div><ul>' + (mon.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul>';
+            hint = '<div class="analogy">たとえると: ' + Q.rich(mon.analogy || '') + '</div><ul>' + (mon.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul>';
           }
           await waitTap('<div class="learn-card"><div class="verdict bad" style="font-size:1.2rem">やる気が なくなった… 今日はここまで</div>' +
             '<div class="muted">大丈夫、間違えた問題は復習に出るよ。もう一度 おさらいしよう!</div>' + hint + '</div>' + button('とじる', 'dim'));

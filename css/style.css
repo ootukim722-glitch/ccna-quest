@@ -123,3 +123,18 @@ img.px, canvas.px { image-rendering: pixelated; image-rendering: crisp-edges; }
 .badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .big-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); }
 .result-list .item { padding: 10px 0; border-bottom: 1px solid var(--line); }
+
+/* ---------- 絵文字を使わない部品 ---------- */
+.dpad button::before { content: ""; position: absolute; left: 50%; top: 50%; width: 0; height: 0; border: 9px solid transparent; transform: translate(-50%, -50%); }
+.d-up::before { border-bottom: 14px solid currentColor; border-top: 0; }
+.d-down::before { border-top: 14px solid currentColor; border-bottom: 0; }
+.d-left::before { border-right: 14px solid currentColor; border-left: 0; }
+.d-right::before { border-left: 14px solid currentColor; border-right: 0; }
+.heart { display: inline-block; width: 1.15rem; height: 1rem; margin-left: 3px; background: var(--ng);
+  clip-path: polygon(0 20%, 12% 0, 38% 0, 50% 18%, 62% 0, 88% 0, 100% 20%, 100% 50%, 50% 100%, 0 50%); }
+.heart.off { background: #3a4a7a; }
+.hearts { display: flex; flex-direction: column; align-items: flex-end; }
+.hearts small { margin-top: 2px; }
+.pip { display: inline-block; width: .7em; height: .7em; margin-right: 3px; background: #3a4a7a; transform: rotate(45deg) scale(.85); vertical-align: middle; }
+.pip.on { background: var(--accent); }
+.stars { letter-spacing: 0; }

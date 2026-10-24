@@ -1,5 +1,5 @@
 /* sw.js - オフラインでも遊べるようにファイルを保存しておく */
-var CACHE = 'ccnaquest-v1';
+var CACHE = 'ccnaquest-v2';
 var FILES = [
   './', 'index.html', 'manifest.webmanifest', 'icon.svg', 'css/style.css',
   'js/core.js', 'js/sprites.js', 'js/audio.js', 'js/gen.js', 'js/maps.js', 'js/ui.js', 'js/quiz.js', 'js/battle.js', 'js/world.js', 'js/screens.js', 'js/main.js',

@@ -47,7 +47,7 @@
         var last = (i + 1 >= qs.length);
         var h = '';
         if (opts.instant) {
-          h += '<div class="verdict ' + (ok ? 'good' : 'bad') + '">' + (ok ? '⭕ せいかい!' : '❌ ざんねん…') + '</div>' +
+          h += '<div class="verdict ' + (ok ? 'good' : 'bad') + '">' + (ok ? 'せいかい!' : 'ざんねん…') + '</div>' +
             '<div class="ex ' + (ok ? 'good' : 'bad') + '">' + Q.rich(q.ex || '') + '</div>';
         }
         h += '<button class="btn primary center" id="qz-next">' + (last ? '結果を見る' : 'つぎへ') + '</button>';

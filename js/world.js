@@ -29,7 +29,7 @@
   Wd.updateHud = function () {
     ui.$('hud-area').textContent = Wd.area.name;
     var n = Q.caughtIn(Wd.area), t = Wd.area.monsters.length;
-    ui.$('hud-prog').textContent = Wd.area.domain + '　ずかん ' + n + '/' + t + (Q.S.badges[Wd.area.id] ? '　🏅' : '');
+    ui.$('hud-prog').textContent = Wd.area.domain + '　ずかん ' + n + '/' + t + (Q.S.badges[Wd.area.id] ? '　バッジ取得' : '');
   };
 
   /* ---------- 描画 ---------- */
@@ -128,7 +128,7 @@
       return;
     }
     await ui.say(b.intro, b.name);
-    var yes = await ui.confirm(a.name + ' のボスに ちょうせんする?\n全5問、やる気(❤️)は3つ。', 'ちょうせん!', 'まだ やめとく');
+    var yes = await ui.confirm(a.name + ' のボスに ちょうせんする?\n全5問、やる気ゲージは3つ。', 'ちょうせん!', 'まだ やめとく');
     if (!yes) return;
     await ui.flash();
     var picks = pickBossQuestions(a, 5);

@@ -142,6 +142,12 @@
     return n / m.qlist.length;
   };
   Q.stars = function (m) { var x = Q.mastery(m); return x >= 1 ? 3 : x >= 0.6 ? 2 : x > 0 ? 1 : 0; };
+  /* 習熟度の表示(絵文字を使わない小さな四角) */
+  Q.pips = function (n, max) {
+    var s = '';
+    for (var i = 0; i < max; i++) s += '<i class="pip' + (i < n ? ' on' : '') + '"></i>';
+    return s;
+  };
   Q.isCaught = function (m) { return !!Q.S.caught[m.id]; };
   Q.caughtIn = function (area) { return area.monsters.filter(Q.isCaught).length; };
   Q.totalMon = function () { return Q.areas.reduce(function (n, a) { return n + a.monsters.length; }, 0); };

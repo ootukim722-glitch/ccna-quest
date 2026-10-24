@@ -24,7 +24,7 @@
       '<div class="title-mons">' + mons + '</div><div class="title-box">';
     if (hasName) {
       h += '<div class="card" style="text-align:left"><div style="font-weight:800">おかえり、' + Q.esc(Q.S.name) + ' (' + rank() + ')</div>' +
-        '<div class="muted">🔥 れんぞく ' + (Q.S.streak.last === Q.day() || Q.S.streak.last === Q.day() - 1 ? Q.S.streak.days : 0) + ' 日　📘 ずかん ' + Q.totalCaught() + '/' + Q.totalMon() + '</div>' +
+        '<div class="muted">れんぞく ' + (Q.S.streak.last === Q.day() || Q.S.streak.last === Q.day() - 1 ? Q.S.streak.days : 0) + ' 日　ずかん ' + Q.totalCaught() + '/' + Q.totalMon() + '</div>' +
         '<div class="muted">きょうは ' + Q.S.daily.answered + ' 問 こたえたよ</div></div>' +
         '<button class="btn go center" data-act="go">つづきから あそぶ</button>';
     } else {
@@ -53,8 +53,8 @@
       await ui.say([
         'ようこそ、' + Q.S.name + '! わしは ハカセ。ネットワークの せかいへ ようこそ。',
         'この世界には「ようご」の モンスターが すんでいる。\nクイズに 勝って なかまに しよう!',
-        '草むら(濃い緑)を歩くと バトル! 正解すると こうげき、まちがえると やる気(❤️)が へる。\n0に なっても ペナルティは ないから あんしんしてね。',
-        '説明は 先生(白い服の人)が たとえ話で 教えてくれる。\nまずは 先生に 話しかけてみよう! ☰メニューで ずかん・ふくしゅう・もぎしけん も使えるよ。'
+        '草むら(濃い緑)を歩くと バトル! 正解すると こうげき、まちがえると やる気ゲージが へる。\n0に なっても ペナルティは ないから あんしんしてね。',
+        '説明は 先生(白い服の人)が たとえ話で 教えてくれる。\nまずは 先生に 話しかけてみよう! 右上の「メニュー」で ずかん・ふくしゅう・もぎしけん も使えるよ。'
       ], 'ハカセ');
     }
   }
@@ -64,20 +64,20 @@
     var due = Q.dueIds().length, seen = Object.keys(Q.S.srs).length;
     var acc = Q.S.stats.ans ? Math.round(Q.S.stats.ok / Q.S.stats.ans * 100) : 0;
     var rec = '';
-    if (due >= 5) rec = '🔁 ふくしゅう が ' + due + ' 問 たまってるよ。ふくしゅうバトルで 思い出そう!';
+    if (due >= 5) rec = 'ふくしゅう が ' + due + ' 問 たまってるよ。ふくしゅうバトルで 思い出そう!';
     else {
       var next = Q.areas.filter(function (a) { return Q.caughtIn(a) < Math.ceil(a.monsters.length * 0.7); })[0];
-      rec = next ? '🎯 おすすめ: 「' + next.name + '」で 仲間を ふやそう' : '🏁 ぜんぶのエリアで準備OK! もぎしけんで 実力を試そう';
+      rec = next ? 'おすすめ: 「' + next.name + '」で 仲間を ふやそう' : 'ぜんぶのエリアで準備OK! もぎしけんで 実力を試そう';
     }
     var h = '<div class="card"><div style="font-weight:800;font-size:1.05rem">' + Q.esc(Q.S.name) + '　<span class="tag gold">' + rank() + '</span></div>' +
-      '<div class="muted">🔥 れんぞく ' + (Q.S.streak.last >= Q.day() - 1 ? Q.S.streak.days : 0) + ' 日　📘 ' + Q.totalCaught() + '/' + Q.totalMon() + ' 体　✅ せいかいりつ ' + acc + '%</div>' +
+      '<div class="muted">れんぞく ' + (Q.S.streak.last >= Q.day() - 1 ? Q.S.streak.days : 0) + ' 日　ずかん ' + Q.totalCaught() + '/' + Q.totalMon() + ' 体　せいかいりつ ' + acc + '%</div>' +
       '<div class="muted" style="margin-top:6px">' + rec + '</div></div>' +
-      '<button class="btn" data-act="dex">📘 ずかん<small>集めた用語の説明を いつでも読める</small></button>' +
-      '<button class="btn ' + (due ? 'primary' : '') + '" data-act="review">🔁 ふくしゅうバトル<small>' + (due ? due + ' 問 思い出す時期が来ています' : 'いま出す時期の問題はありません(弱点おさらいもできます)') + '</small></button>' +
-      '<button class="btn" data-act="areas">🗺 エリア いどう<small>ばっじ ' + Object.keys(Q.S.badges).length + '/' + Q.areas.length + '</small></button>' +
-      '<button class="btn" data-act="drill">🧮 けいさんドリル<small>サブネット計算を 自動で何度でも</small></button>' +
-      '<button class="btn" data-act="exam">📝 もぎしけん<small>試験の出題分野の割合で 出題</small></button>' +
-      '<button class="btn" data-act="settings">⚙ せってい・バックアップ</button>';
+      '<button class="btn" data-act="dex">ずかん<small>集めた用語の説明を いつでも読める</small></button>' +
+      '<button class="btn ' + (due ? 'primary' : '') + '" data-act="review">ふくしゅうバトル<small>' + (due ? due + ' 問 思い出す時期が来ています' : 'いま出す時期の問題はありません(弱点おさらいもできます)') + '</small></button>' +
+      '<button class="btn" data-act="areas">エリア いどう<small>ばっじ ' + Object.keys(Q.S.badges).length + '/' + Q.areas.length + '</small></button>' +
+      '<button class="btn" data-act="drill">けいさんドリル<small>サブネット計算を 自動で何度でも</small></button>' +
+      '<button class="btn" data-act="exam">もぎしけん<small>試験の出題分野の割合で 出題</small></button>' +
+      '<button class="btn" data-act="settings">せってい・バックアップ</button>';
     var body = ui.panel('メニュー', h, { onBack: toMap });
     ui.bind(body, { dex: function () { S.dex(); }, review: S.review, areas: S.areas, drill: S.drill, exam: S.exam, settings: S.settings });
   };
@@ -93,7 +93,7 @@
     var grid = '<div class="dex-grid">' + area.monsters.map(function (m) {
       var got = Q.isCaught(m), st = Q.stars(m);
       return '<div class="dex-cell ' + (got ? '' : 'unk') + '" data-act="mon" data-arg="' + m.id + '"><img class="px" src="' + Q.monImg(m.id) + '" alt="">' +
-        '<div class="n">' + (got ? Q.esc(m.nick) : '？？？') + '</div><div class="stars">' + (got ? '★'.repeat(st) + '☆'.repeat(3 - st) : '') + '</div></div>';
+        '<div class="n">' + (got ? Q.esc(m.nick) : '？？？') + '</div><div class="stars">' + (got ? Q.pips(st, 3) : '') + '</div></div>';
     }).join('') + '</div>';
     var body = ui.panel('ずかん', tabs + grid, { onBack: S.menu });
     ui.bind(body, { tab: function (id) { S.dex(id); }, mon: function (id) { S.monDetail(id); } });
@@ -104,8 +104,8 @@
     var m = Q.mon[id];
     if (!Q.isCaught(m)) { ui.toast('まだ出会っていないよ。草むらで さがそう!'); return; }
     var st = Q.stars(m), h = '<img class="px big-mon" src="' + Q.monImg(m.id) + '" alt="">' +
-      '<div class="card"><h3>' + Q.esc(m.nick) + '　<span class="stars">' + '★'.repeat(st) + '☆'.repeat(3 - st) + '</span></h3><div class="muted">' + Q.esc(m.term) + '</div>' +
-      '<div class="learn-card"><div class="analogy">💡 ' + Q.rich(m.analogy || '') + '</div><ul>' + (m.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul></div></div>' +
+      '<div class="card"><h3>' + Q.esc(m.nick) + '　<span class="stars">' + Q.pips(st, 3) + '</span></h3><div class="muted">' + Q.esc(m.term) + '</div>' +
+      '<div class="learn-card"><div class="analogy">たとえると: ' + Q.rich(m.analogy || '') + '</div><ul>' + (m.points || []).map(function (p) { return '<li>' + Q.rich(p) + '</li>'; }).join('') + '</ul></div></div>' +
       '<div class="card"><h3>この用語の問題</h3>' + m.qlist.map(function (q) {
         var r = Q.S.srs[q.id];
         return '<div class="row" style="justify-content:space-between;padding:4px 0"><span class="muted">' + (r ? '練習 ' + r.seen + '回 / 正解 ' + r.ok + '回' : 'まだ解いていない') + '</span><span class="tag ' + (r && r.box >= 3 ? 'ok' : '') + '">' + (r && r.box >= 3 ? '身についた' : '練習中') + '</span></div>';
@@ -117,7 +117,7 @@
   S.areas = function () {
     var h = Q.areas.map(function (a) {
       var n = Q.caughtIn(a), t = a.monsters.length, pct = Math.round(n / t * 100);
-      return '<button class="btn" data-act="go" data-arg="' + a.id + '"><div class="row" style="justify-content:space-between"><span>' + Q.esc(a.name) + (Q.S.badges[a.id] ? ' 🏅' : '') + '</span><span class="tag">' + n + '/' + t + '</span></div>' +
+      return '<button class="btn" data-act="go" data-arg="' + a.id + '"><div class="row" style="justify-content:space-between"><span>' + Q.esc(a.name) + (Q.S.badges[a.id] ? ' (バッジ取得)' : '') + '</span><span class="tag">' + n + '/' + t + '</span></div>' +
         '<small>' + Q.esc(a.domain) + (EXAM_W[a.id] ? '(試験の約' + EXAM_W[a.id] + '%)' : '') + '</small><div class="bar" style="margin-top:6px"><i style="width:' + pct + '%"></i></div></button>';
     }).join('');
     var body = ui.panel('エリア いどう', h, { onBack: S.menu });
@@ -150,9 +150,9 @@
   var drillLevel = 1;
   S.drill = function () {
     var K = Q.gen.kinds;
-    var h = '<div class="card"><h3>💡 計算のコツ</h3><div class="muted" style="line-height:1.7">ブロックサイズ = 256 − マスクの値。<br>例: /26 のマスクは 255.255.255.192 → ブロックサイズ 64。<br>ネットワークアドレスは 0, 64, 128, 192…。ブロードキャストは「次のネットワークの1つ前」!</div></div>' +
+    var h = '<div class="card"><h3>計算のコツ</h3><div class="muted" style="line-height:1.7">ブロックサイズ = 256 − マスクの値。<br>例: /26 のマスクは 255.255.255.192 → ブロックサイズ 64。<br>ネットワークアドレスは 0, 64, 128, 192…。ブロードキャストは「次のネットワークの1つ前」!</div></div>' +
       '<div class="row" style="margin-bottom:10px"><span class="tag">むずかしさ</span><button class="tabs-btn tag ' + (drillLevel === 1 ? 'gold' : '') + '" data-act="lv" data-arg="1" style="border:0">ふつう(/24〜/30)</button><button class="tag ' + (drillLevel === 2 ? 'gold' : '') + '" data-act="lv" data-arg="2" style="border:0">むずかしい(/16〜)</button></div>' +
-      '<button class="btn primary" data-act="start" data-arg="mix">🎲 ミックス 10問<small>ぜんぶのタイプから ランダム</small></button>' +
+      '<button class="btn primary" data-act="start" data-arg="mix">ミックス 10問<small>ぜんぶのタイプから ランダム</small></button>' +
       Object.keys(K).map(function (k) { return '<button class="btn" data-act="start" data-arg="' + k + '">' + Q.esc(K[k].label) + '<small>10問</small></button>'; }).join('');
     var body = ui.panel('けいさんドリル', h, { onBack: S.menu });
     ui.bind(body, {
@@ -204,11 +204,11 @@
 
   /* ---------- せってい ---------- */
   S.settings = function () {
-    var h = '<button class="btn" data-act="sfx">🔊 こうかおん: ' + (Q.S.set.sfx ? 'ON' : 'OFF') + '</button>' +
-      '<button class="btn" data-act="bgm">🎵 BGM: ' + (Q.S.set.bgm ? 'ON' : 'OFF') + '</button>' +
-      '<button class="btn" data-act="export">💾 バックアップ(コピー)<small>進み具合を文字にしてコピーします。機種変更や念のための保存に</small></button>' +
-      '<button class="btn" data-act="import">📥 バックアップから戻す<small>コピーした文字を貼りつけます</small></button>' +
-      '<button class="btn" data-act="reset" style="background:#7f1d1d">🗑 さいしょからやり直す<small>ぜんぶ消えます</small></button>' +
+    var h = '<button class="btn" data-act="sfx">こうかおん: ' + (Q.S.set.sfx ? 'ON' : 'OFF') + '</button>' +
+      '<button class="btn" data-act="bgm">BGM: ' + (Q.S.set.bgm ? 'ON' : 'OFF') + '</button>' +
+      '<button class="btn" data-act="export">バックアップ(コピー)<small>進み具合を文字にしてコピーします。機種変更や念のための保存に</small></button>' +
+      '<button class="btn" data-act="import">バックアップから戻す<small>コピーした文字を貼りつけます</small></button>' +
+      '<button class="btn" data-act="reset" style="background:#7f1d1d">さいしょからやり直す<small>ぜんぶ消えます</small></button>' +
       '<div class="muted" style="margin-top:10px">' + Q.esc(Q.title) + '　ずかん ' + Q.totalMon() + ' 体 / 問題 ' + Object.keys(Q.qs).length + ' 問</div>';
     var body = ui.panel('せってい', h, { onBack: S.menu });
     ui.bind(body, {

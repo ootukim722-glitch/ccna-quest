@@ -97,7 +97,7 @@
 
   ui.hearts = function (n, max) {
     var s = '';
-    for (var i = 0; i < max; i++) s += i < n ? '❤️' : '🖤';
+    for (var i = 0; i < max; i++) s += '<i class="heart' + (i < n ? '' : ' off') + '"></i>';
     return s;
   };
 })();
