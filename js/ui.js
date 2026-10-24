@@ -96,7 +96,7 @@
   };
 
   ui.hearts = function (n, max) {
-    var s = '';
+    var s = '<span class="hrow">';
     for (var i = 0; i < max; i++) s += '<i class="heart' + (i < n ? '' : ' off') + '"></i>';
     return s;
   };

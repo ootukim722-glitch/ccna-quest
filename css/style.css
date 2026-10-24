@@ -138,3 +138,4 @@ img.px, canvas.px { image-rendering: pixelated; image-rendering: crisp-edges; }
 .pip { display: inline-block; width: .7em; height: .7em; margin-right: 3px; background: #3a4a7a; transform: rotate(45deg) scale(.85); vertical-align: middle; }
 .pip.on { background: var(--accent); }
 .stars { letter-spacing: 0; }
+.hrow { display: flex; flex-direction: row; }
