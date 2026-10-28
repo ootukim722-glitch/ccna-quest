@@ -43,7 +43,7 @@
       var c = $('b-cmd'); c.className = cls || 'cmd4';
       var html = '';
       items.forEach(function (it, i) {
-        html += '<button class="cb ' + (it.cls || '') + '" data-i="' + i + '"><span class="cbl">' + Q.rich(it.label) + '</span></button>';
+        html += '<button class="cb ' + (it.cls || '') + (it.off ? ' dim' : '') + '" data-i="' + i + '"' + (it.off ? ' disabled' : '') + '><span class="cbl">' + Q.rich(it.label) + '</span></button>';
       });
       if (withBack) html += '<button class="cb backbtn" data-i="' + items.length + '"><span class="cbl">もどる</span></button>';
       c.innerHTML = html;
@@ -54,7 +54,7 @@
       };
       function onKey(e) {
         var n = parseInt(e.key, 10);
-        if (n >= 1 && n <= items.length) { e.preventDefault(); done(n - 1); }
+        if (n >= 1 && n <= items.length && !items[n - 1].off) { e.preventDefault(); done(n - 1); }
       }
       document.addEventListener('keydown', onKey);
     });
@@ -203,7 +203,7 @@
     var q = B.q;
     var head = (B.kind === 'gym' || B.kind === 'review') ? '[' + q.src.mon.term + ']\n' : '';
     setText(head + q.q);
-    var items = q.choices.map(function (c, i) { return { label: c, cls: 'mv' + i }; });
+    var items = q.choices.map(function (c, i) { return { label: c, cls: 'mv' + i, off: !!(B.elim && B.elim.indexOf(i) >= 0) }; });
     var pick = await cmd(items, 'moves', true);
     if (pick === items.length) { cmdClear(); return; }
     B.q = null;
@@ -347,16 +347,19 @@
 
   /* ---------- ヒント・にげる ---------- */
   async function doHint() {
-    var m = B.q.src.mon;
+    var q = B.q, m = q.src.mon;
     cmdClear();
     if (B.hinted) {
-      await msg('ヒントは もう よんだね。たとえ話を おもいだそう。');
-      await msg(m.analogy, true);
+      await msg('ヒントは もう つかったよ。きえていない 2つから えらんでね。');
+      await msg('たとえ話: ' + m.analogy, true);
       return;
     }
     B.hinted = true;
-    await msg('ヒント! (この もんだいの けいけんちは はんぶんに なるよ)');
-    await msg(m.analogy, true);
+    /* まちがいの わざを 2つ けす(本当に絞れるヒント)。正解はかならず のこる */
+    var wrong = [0, 1, 2, 3].filter(function (i) { return i !== q.ans; });
+    B.elim = Q.shuffle(wrong).slice(0, 2);
+    await msg('ヒント! まちがいの わざを 2つ けしたよ。\n(この もんだいの けいけんちは はんぶんに なるよ)');
+    await msg('かんがえかたの たとえ話\n' + m.analogy, true);
   }
   async function doRun() {
     cmdClear();
@@ -395,7 +398,7 @@
     await msg('ゆけ! ' + meName() + '!');
 
     while (!B.over) {
-      if (!B.q) { B.q = pickQ(); B.hinted = false; }
+      if (!B.q) { B.q = pickQ(); B.hinted = false; B.elim = null; }
       setText(meName() + 'は どうする?');
       var c = await cmd([
         { label: 'たたかう', cls: 'c-fight' }, { label: 'なかま', cls: 'c-mate' },
