@@ -196,3 +196,7 @@ p { margin: 0 0 .6em; line-height: 1.75; }
   .dlg { min-height: 110px; }
   .dlg-text { min-height: 4.6em; }
 }
+
+/* 長押しで文字選択や拡大鏡・メニューが出ないようにする(入力欄と端末の出力は除く) */
+button, canvas, img, .btn, nav, header { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea { -webkit-user-select: text; user-select: text; }

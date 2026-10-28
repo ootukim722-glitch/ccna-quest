@@ -14,7 +14,7 @@
       return;
     }
     ui.$('btn-menu').addEventListener('click', function () { Q.sfx('tap'); PA.unlock(); PA.screens.openMenu(); });
-    document.addEventListener('contextmenu', function (e) { if (e.target.closest('.dpad, .a-btn')) e.preventDefault(); });
+    document.addEventListener('contextmenu', function (e) { if (!e.target.closest('input, textarea')) e.preventDefault(); });
     document.addEventListener('visibilitychange', function () { if (document.hidden) Q.write(); });
     PA.world.initOnce();
     PA.screens.title();

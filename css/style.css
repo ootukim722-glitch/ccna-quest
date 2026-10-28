@@ -139,3 +139,8 @@ img.px, canvas.px { image-rendering: pixelated; image-rendering: crisp-edges; }
 .pip.on { background: var(--accent); }
 .stars { letter-spacing: 0; }
 .hrow { display: flex; flex-direction: row; }
+
+/* 長押しで文字選択や拡大鏡・メニューが出ないようにする(入力欄は除く) */
+html, body, #app, #app * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea { -webkit-user-select: text; user-select: text; }
+canvas, img { -webkit-user-drag: none; }

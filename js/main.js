@@ -13,7 +13,7 @@
       return;
     }
     ui.$('btn-menu').addEventListener('click', function () { Q.sfx('tap'); Q.audioUnlock(); Q.screens.menu(); });
-    document.addEventListener('contextmenu', function (e) { if (e.target.closest('.dpad, .a-btn')) e.preventDefault(); });
+    document.addEventListener('contextmenu', function (e) { if (!e.target.closest('input, textarea')) e.preventDefault(); });
     document.addEventListener('visibilitychange', function () { if (document.hidden) Q.write(); });
     Q.screens.title();
     if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) {
